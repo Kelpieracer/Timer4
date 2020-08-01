@@ -7,23 +7,23 @@ namespace RCB.TypeScript.Services
 {
     public class PersonService : ServiceBase
     {
-        protected static List<PersonModel> PeopleList { get; }
+        protected static List<User> PeopleList { get; }
 
         static PersonService()
         {
-            PeopleList = new List<PersonModel>
+            PeopleList = new List<User>
             {
-                new PersonModel(1, "Bill", "Gates"),
-                new PersonModel(2, "Jeffrey", "Richter"),
-                new PersonModel(3, "Dennis", "Ritchie"),
-                new PersonModel(4, "Ken", "Thompson"),
-                new PersonModel(5, "Steve", "Jobs"),
-                new PersonModel(6, "Steve", "Ballmer"),
-                new PersonModel(7, "Alan", "Turing")
+                new User(1, "Bill", "Gates"),
+                new User(2, "Jeffrey", "Richter"),
+                new User(3, "Dennis", "Ritchie"),
+                new User(4, "Ken", "Thompson"),
+                new User(5, "Steve", "Jobs"),
+                new User(6, "Steve", "Ballmer"),
+                new User(7, "Alan", "Turing")
             };
         }
 
-        public virtual Result<List<PersonModel>> Search(string term = null)
+        public virtual Result<List<User>> Search(string term = null)
         {
             if (!string.IsNullOrEmpty(term))
             {
@@ -44,7 +44,7 @@ namespace RCB.TypeScript.Services
             return Ok(PeopleList);
         }
 
-        public virtual Result<int> Add(PersonModel model)
+        public virtual Result<int> Add(User model)
         {
             if(model == null)
                 return Error<int>();
@@ -66,30 +66,30 @@ namespace RCB.TypeScript.Services
                 return Error<int>("Person with the same first name and last name already exists.");
             }
 
-            var newId = PeopleList.Max(x => x?.Id ?? 0) + 1;
-            model.Id = newId;
+            var newId = PeopleList.Max(x => x?.UserId ?? 0) + 1;
+            model.UserId = newId;
 
             PeopleList.Add(model);
 
-            return Ok(model.Id);
+            return Ok(model.UserId);
         }
         
-        public virtual Result Update(PersonModel model)
+        public virtual Result Update(User model)
         {
             if (model == null)
                 return Error();
-            if (model.Id <= 0)
-                return Error($"{model.Id} <= 0.");
-            var person = PeopleList.Where(x => x.Id == model.Id).FirstOrDefault();
+            if (model.UserId <= 0)
+                return Error($"{model.UserId} <= 0.");
+            var person = PeopleList.Where(x => x.UserId == model.UserId).FirstOrDefault();
             if (person == null)
-                return Error($"Person with id = {model.Id} not found.");
+                return Error($"Person with id = {model.UserId} not found.");
 
             TrimStrings(model);
 
             var personExists =
                 PeopleList
                 .Any(x =>
-                    x.Id != model.Id &&
+                    x.UserId != model.UserId &&
                     x.FirstName == model.FirstName &&
                     x.LastName == model.LastName
                     );
@@ -106,14 +106,14 @@ namespace RCB.TypeScript.Services
 
         public virtual Result Delete(int id)
         {
-            var unit = PeopleList.Where(x => x.Id == id).FirstOrDefault();
+            var unit = PeopleList.Where(x => x.UserId == id).FirstOrDefault();
             if (unit == null)
                 return Error($"Can't find person with Id = {id}.");
             PeopleList.Remove(unit);
             return Ok();
         }
         
-        private static void TrimStrings(PersonModel model)
+        private static void TrimStrings(User model)
         {
             model.FirstName = model.FirstName.Trim();
             model.LastName = model.LastName.Trim();

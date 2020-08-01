@@ -22,7 +22,7 @@ namespace RCB.TypeScript.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult Add(PersonModel model)
+        public IActionResult Add(User model)
         {
             if (model == null)
                 return BadRequest($"{nameof(model)} is null.");
@@ -31,7 +31,7 @@ namespace RCB.TypeScript.Controllers
         }
 
         [HttpPatch("{id:int}")]
-        public IActionResult Update(PersonModel model)
+        public IActionResult Update(User model)
         {
             if (model == null)
                 return BadRequest($"{nameof(model)} is null.");

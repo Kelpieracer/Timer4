@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,21 @@ namespace RCB.TypeScript.Controllers
     {
         public IActionResult Index()
         {
+            using (var context = new Models.TimerDbContext())
+            {
+                var customer = new Models.Customer
+                {
+                    Name = "asiakas",
+                };
+                context.Customers.Add(customer);
+                context.SaveChanges();
+
+                var customers = context.Customers.Take(10).ToList();
+                foreach (var e in customers)
+                    Console.WriteLine($"Customer: {e}");
+            }
+
+
             var webSessionContext = new WebSessionContext
             {
                 Ssr = new SsrSessionData
