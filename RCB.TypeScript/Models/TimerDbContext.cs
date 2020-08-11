@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace RCB.TypeScript.Models
 {
@@ -15,6 +10,7 @@ namespace RCB.TypeScript.Models
         public virtual DbSet<Rate> Rates { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
         public virtual DbSet<WorkItem> WorkItems { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\TapioM\Documents\TimerDB.mdf;Integrated Security=True;Connect Timeout=30");

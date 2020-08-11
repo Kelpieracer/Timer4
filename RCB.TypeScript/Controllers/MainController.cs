@@ -12,18 +12,17 @@ namespace RCB.TypeScript.Controllers
         {
             using (var context = new Models.TimerDbContext())
             {
-                var customer = new Models.Customer
-                {
-                    Name = "asiakas",
-                };
-                context.Customers.Add(customer);
-                context.SaveChanges();
+                //var customer = new Models.Customer
+                //{
+                //    Name = "asiakas",
+                //};
+                //context.Customers.Add(customer);
+                //context.SaveChanges();
 
                 var customers = context.Customers.Take(10).ToList();
                 foreach (var e in customers)
                     Console.WriteLine($"Customer: {e}");
             }
-
 
             var webSessionContext = new WebSessionContext
             {

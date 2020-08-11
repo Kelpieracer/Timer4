@@ -4,6 +4,7 @@ using System.Text.Json;
 using Microsoft.AspNetCore.NodeServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.SpaServices;
 
 namespace RCB.TypeScript.Extensions
 {

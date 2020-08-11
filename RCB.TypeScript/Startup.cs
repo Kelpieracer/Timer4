@@ -42,7 +42,7 @@ namespace RCB.TypeScript
 
             // Add your own services here.
             services.AddScoped<AccountService>();
-            services.AddScoped<PersonService>();
+            services.AddScoped<UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

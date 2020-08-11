@@ -18,7 +18,7 @@ namespace RCB.TypeScript.Controllers
         }
 
         [HttpPost("[action]")]
-        public IActionResult Login([FromBody]Login model)
+        public IActionResult Login([FromBody]LoginModel model)
         {
             var result = AccountService.Login(HttpContext, model.Login, model.Password);
             return Json(result);
